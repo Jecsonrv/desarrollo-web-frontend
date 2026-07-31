@@ -1,0 +1,19 @@
+﻿@model BibliotecaMVC.Models.Autor
+
+@{
+    ViewData["Titulo"] = "Detalles del Autor";
+}
+
+<h1>@Model.Nombre</h1>
+<dl class="row">
+    <dt>Nacionalidad</dt>
+    <dd>@Model.Nacionalidad</dd>
+
+    <dt>Fecha de Nacimiento</dt>
+    <dd>@Model.FechaNacimiento.ToString("yyyy-MM-dd")</dd>
+
+    <dt>Activo</dt>
+    <dd>@Model.Activo</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-outline-secondary">Volver al Listado</a>

@@ -4,7 +4,13 @@
     };
  *@
 @model List<BibliotecaMVC.Models.Libro>
-<h2>Catalogo de Libros</h2>
+@{
+    ViewData["Title"] = "Catálogo de Libros";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<a asp-action="Create" class="btn btn-dark mb-3">Nuevo Libro +</a>
 
 <table class="table table-striped">
     <thead>
@@ -15,6 +21,7 @@
             <th>Categoría</th>
             <th>Precio</th>
             <th>Estado</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -28,14 +35,19 @@
             <td>$@libro.Precio</td>
 
             <td>
-                @if (@libro.Disponible)
+                @if (libro.Disponible)
                 {
-                    <spam class="badge bg-success">Disponible</spam>
+                    <span class="badge bg-success">Disponible</span>
                 }
                 else
                 {
-                    <spam class="badge bg-danger">Prestado</spam>
+                    <span class="badge bg-danger">Prestado</span>
                 }
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@libro.ID" class="btn btn-sm btn-outline-secondary">Ver detalles</a>
+                <a asp-action="Edit" asp-route-id="@libro.ID" class="btn btn-sm btn-outline-dark">Editar</a>
+                <a asp-action="Delete" asp-route-id="@libro.ID" class="btn btn-sm btn-outline-danger">Eliminar</a>
             </td>
         </tr>
     }

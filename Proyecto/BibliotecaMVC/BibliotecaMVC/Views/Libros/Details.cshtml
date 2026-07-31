@@ -1,0 +1,33 @@
+@model BibliotecaMVC.Models.Libro
+
+@{
+    ViewData["Title"] = "Detalles del Libro";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="card mt-4">
+    <div class="card-header">
+        <h4>Libro: @Model.Titulo</h4>
+    </div>
+    <div class="card-body">
+        <p><strong>ID:</strong> @Model.ID</p>
+        <p><strong>Autor:</strong> @Model.Autor</p>
+        <p><strong>Categoría:</strong> @Model.Categoria</p>
+        <p><strong>Precio:</strong> $@Model.Precio</p>
+        <p><strong>Estado:</strong> 
+            @if(Model.Disponible)
+            {
+                <span class="badge bg-success">Disponible</span>
+            }
+            else
+            {
+                <span class="badge bg-danger">Prestado</span>
+            }
+        </p>
+    </div>
+    <div class="card-footer">
+        <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-outline-dark">Editar</a>
+        <a asp-action="Index" class="btn btn-outline-secondary">Volver al catálogo</a>
+    </div>
+</div>

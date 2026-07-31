@@ -1,0 +1,29 @@
+@model BibliotecaMVC.Models.Autor
+
+@{
+    ViewData["Title"] = "Eliminar Autor";
+}
+
+<h1 class="text-danger">@ViewData["Title"]</h1>
+
+<div class="alert alert-danger" role="alert">
+    <strong>¿Estás seguro que deseas eliminar a este autor?</strong> Esta acción no se puede deshacer.
+</div>
+
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Nombre @Model.Apellido</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.Nacionalidad</h6>
+        <p class="card-text">
+            <strong>Fecha de Nacimiento:</strong> @Model.FechaNacimiento.ToString("dd/MM/yyyy")
+        </p>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post">
+    <!-- Se incluye el ID oculto -->
+    <input type="hidden" asp-for="ID" />
+
+    <button type="submit" class="btn btn-outline-danger">Confirmar Eliminación</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+</form>
