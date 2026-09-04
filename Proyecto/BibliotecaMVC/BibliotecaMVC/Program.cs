@@ -1,7 +1,12 @@
+using BibliotecaMVC.Repositories;
+using BibliotecaMVC.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IRepositorioLibro, RepositorioLibroEnMemoria>();
+builder.Services.AddScoped<IAutorService, AutorServiceAlternativo>();
 
 var app = builder.Build();
 

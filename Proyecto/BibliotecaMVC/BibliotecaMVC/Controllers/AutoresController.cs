@@ -1,67 +1,26 @@
 ﻿using BibliotecaMVC.Models;
+using BibliotecaMVC.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaMVC.Controllers
 {
     public class AutoresController : Controller
     {
-      
-            private static List<Autor> _autores = new List<Autor>()
-            {
-                new Autor
-                {
-                    ID = 1,
-                    Nombre = "Robert",
-                    Apellido = "Martin",
-                    Nacionalidad = "Estadounidense",
-                    FechaNacimiento = new DateTime(1952, 12, 5),
-                    Activo = true
-                },
-                new Autor
-                {
-                    ID = 2,
-                    Nombre = "Martin",
-                    Apellido = "Fowler",
-                    Nacionalidad = "Británico",
-                    FechaNacimiento = new DateTime(1963, 12, 18),
-                    Activo = true
-                },
-                new Autor
-                {
-                    ID = 3,
-                    Nombre = "Andrew",
-                    Apellido = "Hunt",
-                    Nacionalidad = "Estadounidense",
-                    FechaNacimiento = new DateTime(1964, 1, 1), 
-                    Activo = true
-                },
-                new Autor
-                {
-                    ID = 4,
-                    Nombre = "David",
-                    Apellido = "Thomas",
-                    Nacionalidad = "Británico",
-                    FechaNacimiento = new DateTime(1956, 1, 1),
-                    Activo = true
-                },
-                new Autor
-                {
-                    ID = 5,
-                    Nombre = "R. J.",
-                    Apellido = "Palacio",
-                    Nacionalidad = "Estadounidense",
-                    FechaNacimiento = new DateTime(1963, 7, 13),
-                    Activo = false
-                }
-            };
+        private readonly IAutorService _autorService;
+
+        public AutoresController(IAutorService autorService)
+        {
+            _autorService = autorService;
+        }
+
         public IActionResult Index()
         {
-            return View(_autores);
+            return View(_autorService.ObtenerTodos());
         }
 
         public IActionResult Details(int id)
         {
-            var autor = _autores.FirstOrDefault(x => x.ID == id);
+            var autor = _autorService.ObtenerPorId(id);
             if(autor == null)
             {
                 return NotFound();
@@ -83,24 +42,13 @@ namespace BibliotecaMVC.Controllers
                 return View(autor);
             }
 
-            if (_autores.Any())
-            {
-                autor.ID = _autores.Max(x => x.ID) + 1;
-
-            }
-            else
-            {
-                autor.ID = 1;
-
-            }
-
-            _autores.Add(autor);
+            _autorService.Agregar(autor);
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
-            var autor = _autores.FirstOrDefault(x => x.ID == id);
+            var autor = _autorService.ObtenerPorId(id);
             if (autor == null)
             {
                 return NotFound();
@@ -122,23 +70,17 @@ namespace BibliotecaMVC.Controllers
                 return View(autor);
             }
 
-            var existingAutor = _autores.FirstOrDefault(x => x.ID == id);
-            if (existingAutor == null)
+            if (!_autorService.Actualizar(id, autor))
             {
                 return NotFound();
             }
-
-            existingAutor.Nombre = autor.Nombre;
-            existingAutor.Apellido = autor.Apellido;
-            existingAutor.Nacionalidad = autor.Nacionalidad;
-            existingAutor.FechaNacimiento = autor.FechaNacimiento;
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int id)
         {
-            var autor = _autores.FirstOrDefault(x => x.ID == id);
+            var autor = _autorService.ObtenerPorId(id);
             if (autor == null)
             {
                 return NotFound();
@@ -150,11 +92,7 @@ namespace BibliotecaMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var autor = _autores.FirstOrDefault(x => x.ID == id);
-            if (autor != null)
-            {
-                _autores.Remove(autor);
-            }
+            _autorService.Eliminar(id);
             return RedirectToAction(nameof(Index));
         }
     }

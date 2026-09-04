@@ -29,3 +29,39 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/*-----------------------------------
+    SEMANA 5*
+ ------------------------------------*/
+
+.section{
+    border: 1px solid red;
+    padding: 10px;
+    margin: 20px;
+ }
+
+.contenedor{
+    border: 1px solid blue;
+    padding: 5px;
+}
+
+.card-demo{
+    border: 1px solid black;
+}
+
+.media-query{
+    display: flex;
+    gap: 20px;
+}
+
+.media-query .card-demo{
+    flex: 1;
+}
+
+@media (max-width: 768px){
+    .media-query {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
