@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IRepositorioLibro, RepositorioLibroEnMemoria>();
 builder.Services.AddScoped<IAutorService, AutorServiceAlternativo>();
+builder.Services.AddScoped<CategoriaService>();
 
 var app = builder.Build();
 
