@@ -1,16 +1,12 @@
-﻿@* @using BibliotecaMVC.Models
-@{
-    List<Libro> libros = ViewBag.Libros;
-    };
- *@
-@model IEnumerable<BibliotecaMVC.Models.Libro>
+﻿@model IEnumerable<BibliotecaMVC.Models.Libro>
 @{
     ViewData["Title"] = "Catálogo de Libros";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<a asp-action="Create" class="btn btn-dark mb-3">Nuevo Libro +</a>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">@ViewData["Title"]</h2>
+    <a asp-action="Create" class="btn btn-dark">Nuevo libro</a>
+</div>
 
 <table class="table table-striped">
     <thead>
@@ -21,35 +17,38 @@
             <th>Categoría</th>
             <th>Precio</th>
             <th>Estado</th>
-            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-    @foreach (var libro in Model)
+    @if (!Model.Any())
     {
         <tr>
-            <td>@libro.ID</td>
-            <td>@libro.Titulo</td>
-            <td>@libro.Autor</td>
-            <td>@libro.Categoria</td>
-            <td>$@libro.Precio</td>
-
-            <td>
-                @if (libro.Disponible)
-                {
-                    <span class="badge bg-success">Disponible</span>
-                }
-                else
-                {
-                    <span class="badge bg-danger">Prestado</span>
-                }
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@libro.ID" class="btn btn-sm btn-outline-secondary">Ver detalles</a>
-                <a asp-action="Edit" asp-route-id="@libro.ID" class="btn btn-sm btn-outline-dark">Editar</a>
-                <a asp-action="Delete" asp-route-id="@libro.ID" class="btn btn-sm btn-outline-danger">Eliminar</a>
-            </td>
+            <td colspan="6" class="text-center text-muted">No hay libros registrados.</td>
         </tr>
+    }
+    else
+    {
+        @foreach (var libro in Model)
+        {
+            <tr>
+                <td>@libro.ID</td>
+                <td>@libro.Titulo</td>
+                <td>@libro.Autor</td>
+                <td>@libro.Categoria</td>
+                <td>@libro.Precio.ToString("C")</td>
+
+                <td>
+                    @if (libro.Disponible)
+                    {
+                        <span class="badge bg-success">Disponible</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Prestado</span>
+                    }
+                </td>
+            </tr>
+        }
     }
     </tbody>
 </table>
