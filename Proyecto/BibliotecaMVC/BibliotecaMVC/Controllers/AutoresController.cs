@@ -70,7 +70,7 @@ namespace BibliotecaMVC.Controllers
         {
             if (id != autor.ID)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             if (!ModelState.IsValid)
@@ -78,11 +78,19 @@ namespace BibliotecaMVC.Controllers
                 return View(autor);
             }
 
+            var exists = await _context.Autores.AnyAsync(a => a.ID == id);
+            if(!exists){
+                return NotFound();
+            }
+
+
             _context.Autores.Update(autor);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
+
+
 
         public async Task<IActionResult> Delete(int id)
         {

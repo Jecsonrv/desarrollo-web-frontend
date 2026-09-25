@@ -6,39 +6,34 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="ID" />
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="card-title">@ViewData["Title"]</h2>
 
-    <div class="mb-3">
-        <label asp-for="Nombre" class="form-label"></label>
-        <input asp-for="Nombre" class="form-control" placeholder="Ingrese nombre" />
-        <span asp-validation-for="Nombre" class="text-danger"></span>
+        <form asp-action="Edit" method="post" class="swal-save-form">
+            <input asp-for="ID" type="hidden" />
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label"></label>
+                <input asp-for="Nombre" class="form-control" placeholder="Ingrese nombre" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Apellido" class="form-label"></label>
+                <input asp-for="Apellido" class="form-control" placeholder="Ingrese apellido" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Nacionalidad" class="form-label"></label>
+                <input asp-for="Nacionalidad" class="form-control" placeholder="Ingrese nacionalidad" />
+                <span asp-validation-for="Nacionalidad" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="FechaNacimiento" class="form-label"></label>
+                <input asp-for="FechaNacimiento" type="date" class="form-control" placeholder="Ingrese fecha de nacimiento" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Guardar Cambios</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>   
+         </form>
     </div>
-
-    <div class="mb-3">
-        <label asp-for="Apellido" class="form-label"></label>
-        <input asp-for="Apellido" class="form-control" placeholder="Ingrese apellido" />
-        <span asp-validation-for="Apellido" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Nacionalidad" class="form-label"></label>
-        <input asp-for="Nacionalidad" class="form-control" placeholder="Ingrese nacionalidad" />
-        <span asp-validation-for="Nacionalidad" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="FechaNacimiento" class="form-label"></label>
-        <input asp-for="FechaNacimiento" class="form-control" type="date" />
-        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
-    </div>
-
-    <div class="mt-4">
-        <button type="submit" class="btn btn-dark"><i class="bi bi-pencil-square"></i> Guardar Cambios</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
-    </div>
-</form>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+</div>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BibliotecaMVC.Models.Libro>
+@model IEnumerable<BibliotecaMVC.Models.Libro>
 @{
     ViewData["Title"] = "Catálogo de Libros";
 }
@@ -17,13 +17,14 @@
             <th>Categoría</th>
             <th>Precio</th>
             <th>Estado</th>
+            <th class="text-center">Acciones</th>
         </tr>
     </thead>
     <tbody>
     @if (!Model.Any())
     {
         <tr>
-            <td colspan="6" class="text-center text-muted">No hay libros registrados.</td>
+            <td colspan="7" class="text-center text-muted">No hay libros registrados.</td>
         </tr>
     }
     else
@@ -46,6 +47,10 @@
                     {
                         <span class="badge bg-danger">Prestado</span>
                     }
+                </td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-route-id="@libro.ID" class="btn btn-sm btn-outline-primary">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@libro.ID" class="btn btn-sm btn-outline-danger">Eliminar</a>
                 </td>
             </tr>
         }
