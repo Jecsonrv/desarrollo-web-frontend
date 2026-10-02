@@ -1,4 +1,7 @@
-﻿<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container-fluid">
         <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BibliotecaMVC</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,6 +31,26 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-controller="Home" asp-action="Acerca_de">Acerca de</a>
                 </li>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item ms-auto">
+                        <span class="nav-link text-dark">Hola, @User.Identity?.Name</span>
+                    </li>
+                    <li class="nav-item">
+                        <form asp-controller="Account" asp-action="Logout" method="post" class="d-flex">
+                            <button type="submit" class="nav-link text-dark border-0 bg-transparent">Cerrar sesión</button>
+                        </form>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item ms-auto">
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Registro</a>
+                    </li>
+                }
             </ul>
         </div>
     </div>

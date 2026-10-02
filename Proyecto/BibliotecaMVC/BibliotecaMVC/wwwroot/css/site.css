@@ -65,3 +65,56 @@ body {
         gap: 20px;
     }
 }
+
+.auth-page {
+    display: grid;
+    min-height: 64vh;
+    place-items: center;
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    width: min(100%, 28rem);
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+}
+
+.auth-heading {
+    margin-bottom: 1.5rem;
+}
+
+.auth-heading h1 {
+    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+}
+
+.auth-heading p,
+.auth-footer {
+    margin-bottom: 0;
+    color: #6c757d;
+}
+
+.auth-validation.validation-summary-valid {
+    display: none;
+}
+
+.auth-validation.validation-summary-errors {
+    margin-bottom: 1rem;
+    color: #842029;
+}
+
+.auth-validation ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.auth-submit {
+    width: 100%;
+}
+
+.auth-footer {
+    margin-top: 1rem;
+    text-align: center;
+}
